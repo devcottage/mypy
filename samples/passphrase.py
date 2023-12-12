@@ -6,7 +6,7 @@ help = sys.argv[0] + " <word-count>"
 
 punctuation = ['_', '=', '+', '--']
 all_words = tuple(open("wordlist.txt", 'r'))
-phrase_words = list(map(lambda w: w.strip(), list(filter(lambda w: len(w) > 4 and len(w) < 10, all_words))))
+phrase_words = list(map(lambda w: w.strip(), list(filter(lambda w: len(w) > 4 and len(w) < 13, all_words))))
 
 args, vals = getopt.getopt(sys.argv[1:], "")
 word_count = int(vals[-1] if len(vals) > 0 else 5)
