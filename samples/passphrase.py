@@ -14,7 +14,7 @@ word_count = int(vals[-1] if len(vals) > 0 else 5)
 # use random.choice() 
 words = [random.choice(phrase_words) for _ in range(0,word_count - 1)]
 words = list(map(lambda w : w.title().strip(), words))
-words.append(str(random.randint(10000,99999)))
+words.append(str(random.randint(1000,9999)))
 random.shuffle(words)
 
 pass_phrase = words.pop()
