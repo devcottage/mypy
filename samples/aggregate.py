@@ -3,7 +3,7 @@
 #   print("".join(a))
 #
 #   b = aggregate({}, "woof", lambda x : str.isalnum(str(x)), lambda y : str.upper(str(y)))
-#   print("".join(a.values()))
+#   print("".join(b.values()))
 #
 import collections.abc as abstract
 def aggregate(container, iterable, filt = lambda _ : True, map = lambda x : x):
