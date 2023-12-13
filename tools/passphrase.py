@@ -23,4 +23,5 @@ pass_phrase = words.pop()
 for w in words:
     pass_phrase += random.choice(punctuation) + w
 
-print(f"{word_count} words phrase, quoted \"{pass_phrase }\"")
+print(f"{word_count} word/{len(pass_phrase)} character phrase:\n", file=sys.stderr)
+print(f"{pass_phrase}"); print("", file=sys.stderr)

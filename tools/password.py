@@ -42,5 +42,5 @@ passwd = "".join(passwd)
 if (caps):
   passwd = passwd.upper()
 
-print(str(len(passwd)) + " character password, quoted : \"" + passwd + "\"")
-
+print(str(len(passwd)) + " character password:\n", file=sys.stderr)
+print(passwd); print("", file=sys.stderr)
