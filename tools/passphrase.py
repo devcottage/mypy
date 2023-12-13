@@ -1,11 +1,13 @@
-import getopt, sys
+import getopt, sys, os
 import random
 import string
 
 help = sys.argv[0] + " <word-count>"
 
 punctuation = ['_', '=', '+', '--']
-all_words = tuple(open("wordlist.txt", 'r'))
+
+tool_dir = os.path.dirname(os.path.abspath(__file__))
+all_words = tuple(open(os.path.join(tool_dir, "wordlist.txt"), 'r'))
 phrase_words = list(map(lambda w: w.strip(), list(filter(lambda w: len(w) > 4 and len(w) < 13, all_words))))
 
 args, vals = getopt.getopt(sys.argv[1:], "")
