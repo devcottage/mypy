@@ -12,13 +12,13 @@ caps = False
 excluded_chars = [ "'", '"', '\\', '`', '[', ']', '{', '}' ]
 is_not_excluded = lambda ch : not ch in excluded_chars
 
+# start out with all printable characters
 allowed_chars = string.printable.strip()
 allowed_chars = "".join(filter(is_not_excluded, allowed_chars))
 
+# handle command-line options
 long_opts = ["help", "all-caps", "no-syms"]
 args, vals = getopt.getopt(sys.argv[1:], "", long_opts)
-#print(args); print(vals)
-
 try: 
   for arg in args:
     if arg[0] == "--help":
@@ -35,9 +35,6 @@ except:
 
 # use random.choice() to get password characters
 passwd = [random.choice(allowed_chars) for _ in range(0,password_len)]
-
-# extra randomization, via shuffle
-for _ in range(random.randint(0,128)) : random.shuffle(passwd)
 passwd = "".join(passwd)
 if (caps):
   passwd = passwd.upper()

@@ -9,11 +9,20 @@ print("".join(a))
 b = aggregate.aggregate({}, "_woof", lambda x : str.isalnum(str(x)), lambda y : str.upper(str(y)))
 print("".join(b.values()))
 
-try:
-    c = aggregate.aggregate(tuple({}), "woof", lambda x : str.isalnum(str(x)), lambda y : str.upper(str(y)))
-except TypeError: 
-    pass
+c = aggregate.aggregate({}, list("_woof"), lambda x : str.isalnum(str(x)), lambda y : str.upper(str(y)))
+print("".join(c.values()))
 
+d = aggregate.aggregate({}, dict(enumerate("_woof")), lambda x : str.isalnum(str(x)), lambda y : str.upper(str(y)))
+print("".join(d.values()))
+
+e = aggregate.aggregate({}, tuple("_woof"), lambda x : str.isalnum(str(x)), lambda y : str.upper(str(y)))
+print("".join(e.values()))
+
+f = aggregate.aggregate([], ['_','w','o','o','f'], lambda x : str.isalnum(str(x)), lambda y : str.upper(str(y)))
+print("".join(f))
+
+g = aggregate.aggregate({}, set(['_','w','o','O','f']), lambda x : str.isalnum(str(x)), lambda y : str.upper(str(y)))
+print("".join(sorted(g.values(),reverse=True)))
 
 import augment_sys_path as augment
 

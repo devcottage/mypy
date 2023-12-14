@@ -10,12 +10,18 @@ import collections.abc as abstract
 #   print("".join(b.values()))
 #
 def aggregate(container, iterable, filter_func=lambda _: True, mapper_func=lambda x: x):
-    for k, v in enumerate(iterable):
-        if filter_func(v):
-            if isinstance(container, abstract.MutableMapping):
+
+    if isinstance(iterable, abstract.MutableMapping):
+        for k,v in iterable.items():
+            if isinstance(container, abstract.MutableMapping) and filter_func(v):
                 container[k] = mapper_func(v)
-            elif isinstance(container, abstract.MutableSequence):
+            elif filter_func(v):
                 container.append(mapper_func(v))
-            else:
-                raise TypeError("container must be a mutable mapping or mutable sequence")
+    else:
+        for k,v in enumerate(iterable):
+            if isinstance(container, abstract.MutableSequence) and filter_func(v): 
+                container.append(mapper_func(v))
+            elif filter_func(v):
+                container[k] = mapper_func(v)
+
     return container
