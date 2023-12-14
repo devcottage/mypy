@@ -4,26 +4,30 @@ import collections.abc as abstract
 # examples: 
 # 
 #   a = aggregate.aggregate([], "woof", lambda x : str.isalnum(str(x)), lambda y : str.upper(str(y)))
-#   print("".join(a))
+#   assert("WOOF" == "".join(a))
 #
 #   b = aggregate.aggregate({}, "woof", lambda x : str.isalnum(str(x)), lambda y : str.upper(str(y)))
-#   print("".join(b.values()))
+#   assert("WOOF" == "".join(a))
 #
 def aggregate(container, iterable, filter_func=lambda _: True, mapper_func=lambda x: x):
-
-    if isinstance(iterable, abstract.MutableMapping):
+    container_type_error = TypeError("container must be a mutable mapping or mutable sequence")
+    if isinstance(iterable, abstract.Mapping):
         for k,v in iterable.items():
             if filter_func(v):
                 if isinstance(container, abstract.MutableMapping):
                     container[k] = mapper_func(v)
-                else:
+                elif isinstance(container, abstract.MutableSequence):
                     container.append(mapper_func(v))
+                else:
+                    raise container_type_error
     else:
-        for k,v in enumerate(iterable):
+        for k,v in enumerate(iterable): # this may throw a TypeError if 'iterable' parameter is not iterable
             if filter_func(v):
                 if isinstance(container, abstract.MutableMapping):
                     container[k] = mapper_func(v)
-                else:
+                elif isinstance(container, abstract.MutableSequence):
                     container.append(mapper_func(v))
+                else:
+                    raise container_type_error
 
     return container
