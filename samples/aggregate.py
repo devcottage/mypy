@@ -13,15 +13,17 @@ def aggregate(container, iterable, filter_func=lambda _: True, mapper_func=lambd
 
     if isinstance(iterable, abstract.MutableMapping):
         for k,v in iterable.items():
-            if isinstance(container, abstract.MutableMapping) and filter_func(v):
-                container[k] = mapper_func(v)
-            elif filter_func(v):
-                container.append(mapper_func(v))
+            if filter_func(v):
+                if isinstance(container, abstract.MutableMapping):
+                    container[k] = mapper_func(v)
+                else:
+                    container.append(mapper_func(v))
     else:
         for k,v in enumerate(iterable):
-            if isinstance(container, abstract.MutableSequence) and filter_func(v): 
-                container.append(mapper_func(v))
-            elif filter_func(v):
-                container[k] = mapper_func(v)
+            if filter_func(v):
+                if isinstance(container, abstract.MutableMapping):
+                    container[k] = mapper_func(v)
+                else:
+                    container.append(mapper_func(v))
 
     return container
