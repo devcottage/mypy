@@ -7,7 +7,7 @@ import collections.abc as abstract
 #   assert("WOOF" == "".join(a))
 #
 #   b = aggregate.aggregate({}, "_woOf_", lambda x : str.isalnum(str(x)), lambda y : str.upper(str(y)))
-#   assert("WOOF" == "".join(a))
+#   assert("WOOF" == "".join(b.values()))
 #
 def aggregate(container, iterable, filter_func=lambda _: True, mapper_func=lambda x: x):
     container_type_error = TypeError("container must be a mutable mapping or mutable sequence")
