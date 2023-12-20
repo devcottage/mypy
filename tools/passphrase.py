@@ -2,7 +2,7 @@ import getopt, sys, os
 import random
 import string
 
-help = sys.argv[0] + " <word-count>"
+help = sys.argv[0] + " --seperator <word-seperator>  <word-count>"
 
 punctuation = ['_', '=', '+', '--']
 
@@ -10,8 +10,19 @@ tool_dir = os.path.dirname(os.path.abspath(__file__))
 all_words = tuple(open(os.path.join(tool_dir, "wordlist.txt"), 'r'))
 phrase_words = list(map(lambda w: w.strip(), list(filter(lambda w: len(w) > 4 and len(w) < 13, all_words))))
 
-args, vals = getopt.getopt(sys.argv[1:], "")
-word_count = int(vals[-1] if len(vals) > 0 else 5)
+# handle command-line options
+opts,args = getopt.getopt(sys.argv[1:], "hs:v", ["help", "seperator="])
+try: 
+  for o,v in opts:
+    if o in ("-h", "--help"):
+        throw
+    elif o in ("-s", "--seperator"):
+        punctuation = [v]
+
+  word_count = int(args[-1] if len(args) > 0 else 5)
+except Exception as ex: 
+   print(help)
+   exit()
 
 # use random.choice() for words in phrase, and add in a number sequence, usually required
 words = [random.choice(phrase_words) for _ in range(0,word_count - 1)]
