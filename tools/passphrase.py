@@ -13,13 +13,13 @@ phrase_words = list(map(lambda w: w.strip(), list(filter(lambda w: len(w) > 4 an
 args, vals = getopt.getopt(sys.argv[1:], "")
 word_count = int(vals[-1] if len(vals) > 0 else 5)
 
-# use random.choice() for words in phrase, and add in a number character, which is usually required
+# use random.choice() for words in phrase, and add in a number sequence, usually required
 words = [random.choice(phrase_words) for _ in range(0,word_count - 1)]
 words = list(map(lambda w : w.title().strip(), words))
 words.append(str(random.randint(1000,9999)))
 random.shuffle(words)
 
-# add punctuation (symbols) as word seperators
+# add punctuation (symbols) as word seperators to make it easier to type
 pass_phrase = words.pop()
 for w in words:
     pass_phrase += random.choice(punctuation) + w

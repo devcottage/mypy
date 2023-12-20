@@ -4,15 +4,12 @@ import string
 
 help = sys.argv[0] + " --caps --no-syms <password-length>"
 
-# options
-no_sym = False
-caps = False
-
-# always exclude quotes and JSON-ish bracket characters
+# exclude quotes and JSON-ish bracket characters, 
+#   to make scripting and cut-and-paste easier
 excluded_chars = [ "'", '"', '\\', '`', '[', ']', '{', '}' ]
 is_not_excluded = lambda ch : not ch in excluded_chars
 
-# start out with all printable characters
+# start out with all printable characters, and prune excuded ones
 allowed_chars = string.printable.strip()
 allowed_chars = "".join(filter(is_not_excluded, allowed_chars))
 
@@ -33,11 +30,10 @@ except:
    print(help)
    exit()
 
-# use random.choice() to get password characters
-passwd = [random.choice(allowed_chars) for _ in range(0,password_len)]
+# use random.choice() of unique set of allowed chars to get password 
+choices = list(set(allowed_chars))
+passwd = [random.choice(choices) for _ in range(0,password_len)]
 passwd = "".join(passwd)
-if (caps):
-  passwd = passwd.upper()
 
 print(str(len(passwd)) + " character password:\n", file=sys.stderr)
 print(passwd); print("", file=sys.stderr)

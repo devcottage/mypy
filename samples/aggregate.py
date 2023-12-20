@@ -1,12 +1,12 @@
 import collections.abc as abstract
 
-
+# aggregation function which takes an optional mapping function and an optional filter function
 # examples: 
 # 
-#   a = aggregate.aggregate([], "woof", lambda x : str.isalnum(str(x)), lambda y : str.upper(str(y)))
+#   a = aggregate.aggregate([], "_wOof_", lambda x : str.isalnum(str(x)), lambda y : str.upper(str(y)))
 #   assert("WOOF" == "".join(a))
 #
-#   b = aggregate.aggregate({}, "woof", lambda x : str.isalnum(str(x)), lambda y : str.upper(str(y)))
+#   b = aggregate.aggregate({}, "_woOf_", lambda x : str.isalnum(str(x)), lambda y : str.upper(str(y)))
 #   assert("WOOF" == "".join(a))
 #
 def aggregate(container, iterable, filter_func=lambda _: True, mapper_func=lambda x: x):
@@ -31,3 +31,4 @@ def aggregate(container, iterable, filter_func=lambda _: True, mapper_func=lambd
                     raise container_type_error
 
     return container
+
