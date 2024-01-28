@@ -23,7 +23,7 @@ try:
         throw
     elif o in ("-s", "--seperator"):
         punctuation = [v]
-    elif o in ("-m", "--maxwor"):
+    elif o in ("-m", "--maxword"):
         max_word_len = int(v)
     elif o in ("-w", "--with-nums"):
         num_count = int(v)
