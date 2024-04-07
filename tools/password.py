@@ -19,7 +19,7 @@ args, vals = getopt.getopt(sys.argv[1:], "", long_opts)
 try: 
   for arg in args:
     if arg[0] == "--help":
-        throw
+        raise RuntimeWarning()
     elif arg[0] == "--all-caps":
         allowed_chars = allowed_chars.upper()
     elif arg[0] == "--no-syms":

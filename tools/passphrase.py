@@ -20,7 +20,7 @@ opts,args = getopt.getopt(sys.argv[1:], "hs:vm:vw:v", ["help", "seperator=", "ma
 try: 
   for o,v in opts:
     if o in ("-h", "--help"):
-        throw
+        raise RuntimeWarning()
     elif o in ("-s", "--seperator"):
         punctuation = [v]
     elif o in ("-m", "--maxword"):
